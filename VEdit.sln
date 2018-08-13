@@ -3,33 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Editor", "VEdit.Editor\VEdit.Editor.csproj", "{FC689ACC-E9CC-444B-823A-E38D0061AC57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Editor", "src\VEdit.Editor\VEdit.Editor.csproj", "{FC689ACC-E9CC-444B-823A-E38D0061AC57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit", "VEdit\VEdit.csproj", "{8D14DE8C-430C-415A-B2A6-FB9C1317F74D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit", "src\VEdit\VEdit.csproj", "{8D14DE8C-430C-415A-B2A6-FB9C1317F74D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.VEdit", "Ninject.Extensions.VEdit\Ninject.Extensions.VEdit.csproj", "{1F272425-3CAE-4B0E-934F-EF836B903CA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.VEdit", "src\Ninject.Extensions.VEdit\Ninject.Extensions.VEdit.csproj", "{1F272425-3CAE-4B0E-934F-EF836B903CA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.UI", "VEdit.UI\VEdit.UI.csproj", "{F21EA153-BD87-422F-905B-CF82CD4763E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.UI", "src\VEdit.UI\VEdit.UI.csproj", "{F21EA153-BD87-422F-905B-CF82CD4763E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Common", "VEdit.Common\VEdit.Common.csproj", "{22A8C4CF-4654-480D-B34C-3CCE7DD76963}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Common", "src\VEdit.Common\VEdit.Common.csproj", "{22A8C4CF-4654-480D-B34C-3CCE7DD76963}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.StandardLibrary", "VEdit.StandardLibrary\VEdit.StandardLibrary.csproj", "{43BE4DE1-DF9D-4EA6-BFDE-EA171FA256BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.StandardLibrary", "src\VEdit.StandardLibrary\VEdit.StandardLibrary.csproj", "{43BE4DE1-DF9D-4EA6-BFDE-EA171FA256BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Plugins", "VEdit.Plugins\VEdit.Plugins.csproj", "{CF645BEE-E684-4ED8-AE37-54FAEC2EA79F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Plugins", "src\VEdit.Plugins\VEdit.Plugins.csproj", "{CF645BEE-E684-4ED8-AE37-54FAEC2EA79F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Execution", "VEdit.Execution\VEdit.Execution.csproj", "{65456007-0BA8-4B38-A226-21AAF96EC665}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Execution", "src\VEdit.Execution\VEdit.Execution.csproj", "{65456007-0BA8-4B38-A226-21AAF96EC665}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{55119AA3-954A-46B9-B7AB-62CD4E123196}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{820A9993-64FB-42E1-8DC3-ACDD1D4A7628}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Core.Tests", "VEdit.Core.Tests\VEdit.Core.Tests.csproj", "{EFD08A1E-B34A-4602-8A41-9751700ED1E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Core.Tests", "tests\VEdit.Core.Tests\VEdit.Core.Tests.csproj", "{EFD08A1E-B34A-4602-8A41-9751700ED1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Core", "VEdit.Core\VEdit.Core.csproj", "{E8B8773B-E5DB-4B6A-86F8-ECA019436FE6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Core", "src\VEdit.Core\VEdit.Core.csproj", "{E8B8773B-E5DB-4B6A-86F8-ECA019436FE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Contracts", "VEdit.Contracts\VEdit.Contracts.csproj", "{3EE1E06D-8D41-4B80-9E9C-DE83A4707282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Contracts", "src\VEdit.Contracts\VEdit.Contracts.csproj", "{3EE1E06D-8D41-4B80-9E9C-DE83A4707282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Hosting", "VEdit.Hosting\VEdit.Hosting.csproj", "{E8A57B3D-8CC2-457D-AB78-25EFF7A996A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VEdit.Hosting", "src\VEdit.Hosting\VEdit.Hosting.csproj", "{E8A57B3D-8CC2-457D-AB78-25EFF7A996A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -45,7 +45,6 @@ namespace VEdit.Core
 
         private Lazy<SocketExtractor> _socketExtractor;
 
-        private readonly List<DataSocket> _children;
         public IEnumerable<DataSocket> Children => _socketExtractor.Value.Sockets;
     }
 

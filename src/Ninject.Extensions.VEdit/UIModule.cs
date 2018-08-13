@@ -11,6 +11,7 @@ namespace Ninject.Extensions.VEdit
     {
         public override void Load()
         {
+
             Bind<IServiceProvider>().To<ServiceProvider>().InSingletonScope();
             Bind<EditorViewModel>().ToSelf().InSingletonScope();
 
