@@ -40,7 +40,9 @@ namespace VEdit.Core
             {
                 foreach (var property in _propertyExtractor.Properties)
                 {
-                    yield return ExtractProperty(property);
+                    var result = ExtractProperty(property);
+                    _applyOnNewSocket(result);
+                    yield return result;
                 }
             }
         }

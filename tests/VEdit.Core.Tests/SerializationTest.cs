@@ -9,10 +9,19 @@ namespace VEdit.Core.Tests
     [TestFixture]
     public class SerializationTest
     {
+        class Test
+        {
+            public string Text { get; set; }
+        }
+
         [Test]
         public void Serialize_ValidNode_DoesNotThrow()
         {
-            Node node = new TestNode();
+            NodeBuilder<GenericNode, GenericNodeBuilder> _builder = new GenericNodeBuilder();
+            var node = _builder
+                .AddInput<Test>()
+                .AddInput<bool>()
+                .Build();
 
             using (var stream = new MemoryStream())
             {
@@ -21,7 +30,7 @@ namespace VEdit.Core.Tests
 
                 stream.Seek(0, SeekOrigin.Begin);
 
-                Node result = (TestNode)formatter.Deserialize(stream);
+                Node result = (GenericNode)formatter.Deserialize(stream);
             }
         }
     }

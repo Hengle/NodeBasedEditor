@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VEdit.Core
 {
@@ -40,12 +41,21 @@ namespace VEdit.Core
         public DataSocket(Node node, SocketType type, Type dataType) : base(node, type)
         {
             DataType = dataType;
-            _socketExtractor = new Lazy<SocketExtractor>(() => new SocketExtractor(this, socket => Parent = socket));
         }
 
-        private Lazy<SocketExtractor> _socketExtractor;
-
-        public IEnumerable<DataSocket> Children => _socketExtractor.Value.Sockets;
+        private List<DataSocket> _children;
+        public IEnumerable<DataSocket> Children
+        {
+            get
+            {
+                if (_children == null)
+                {
+                    SocketExtractor extractor = new SocketExtractor(this, socket => Parent = socket);
+                    _children = extractor.Sockets.ToList();
+                }
+                return _children;
+            }
+        }
     }
 
     [Serializable]
