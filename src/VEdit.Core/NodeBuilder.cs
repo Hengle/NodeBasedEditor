@@ -1,4 +1,6 @@
-﻿namespace VEdit.Core
+﻿using VEdit.Core.Extensions;
+
+namespace VEdit.Core
 {
     public abstract class Builder<T, TBuilder>
         where T: class, new()
@@ -25,9 +27,22 @@
         where TNode: Node, new()
         where TBuilder: NodeBuilder<TNode, TBuilder>
     {
-        public TBuilder AddInput<T>()
+        public TBuilder AddInput<T>(string name = null)
         {
-            Object.AddSocket(new DataSocket<T>(Object, SocketType.Input));
+            var socket = new DataSocket<T>(Object, SocketType.Input)
+            {
+                Name = name
+            };
+
+            if (typeof(T).IsStruct())
+            {
+                Object.AddSocket(new SplittableSocket(socket));
+            }
+            else
+            {
+                Object.AddSocket(socket);
+            }
+
             return _this;
         }
     }

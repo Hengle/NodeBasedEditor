@@ -47,8 +47,8 @@
     <Compile Include="String.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VEdit.Plugins\VEdit.Plugins.csproj">
-      <Project>{CF645BEE-E684-4ED8-AE37-54FAEC2EA79F}</Project>
+    <ProjectReference Include="..\..\src\VEdit.Plugins\VEdit.Plugins.csproj">
+      <Project>{cf645bee-e684-4ed8-ae37-54faec2ea79f}</Project>
       <Name>VEdit.Plugins</Name>
     </ProjectReference>
   </ItemGroup>

@@ -2,24 +2,27 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
 {
     [TestFixture]
     public class SerializationTest
     {
-        class Test
+        struct Test
         {
-            public string Text { get; set; }
+            public string Text;
+            public int Value;
         }
 
         [Test]
-        public void Serialize_ValidNode_DoesNotThrow()
+        public void Serialize_GenericNode_DoesNotThrow()
         {
+            Test test;
+            test.Text = "asd";
+
             NodeBuilder<GenericNode, GenericNodeBuilder> _builder = new GenericNodeBuilder();
             var node = _builder
-                .AddInput<Test>()
+                .AddInput<Test>("Parent")
                 .AddInput<bool>()
                 .Build();
 

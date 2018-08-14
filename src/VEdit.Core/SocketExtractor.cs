@@ -1,68 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using VEdit.Core.Extensions;
 
 namespace VEdit.Core
 {
+    // Splits a struct into multiple sockets based on public fields
     internal class SocketExtractor
     {
-        private readonly PropertyExtractor _propertyExtractor;
-        private readonly Action<DataSocket> _applyOnNewSocket;
+        private readonly FieldExtractor _propertyExtractor;
         private readonly Node _node;
-        private readonly SocketType _socket;
+        private readonly SocketType _type;
+        private readonly DataSocket _socket;
 
-        public SocketExtractor(DataSocket socket, Action<DataSocket> applyOnNewSocket) : this(socket.DataType, socket.Node, socket.Type)
+        public SocketExtractor(DataSocket socket)
         {
-            if (socket is null)
-            {
-                throw new ArgumentNullException(nameof(socket));
-            }
+            _socket = socket ?? throw new ArgumentNullException(nameof(socket));
 
-            _applyOnNewSocket = applyOnNewSocket;
-        }
+            Type dataType = socket.DataType.IsStruct() ? socket.DataType : throw new ArgumentException("type is not a struct");
 
-        public SocketExtractor(Type type, Node node, SocketType socket)
-        {
-            if(type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            _propertyExtractor = new PropertyExtractor(type);
-            _node = node;
-            _socket = socket;
+            _propertyExtractor = new FieldExtractor(dataType);
+            _node = socket.Node;
+            _type = socket.Type;
         }
 
         public IEnumerable<DataSocket> Sockets
         {
             get
             {
-                foreach (var property in _propertyExtractor.Properties)
+                foreach (var property in _propertyExtractor.Fields)
                 {
-                    var result = ExtractProperty(property);
-                    _applyOnNewSocket(result);
-                    yield return result;
+                    yield return ExtractField(property);
                 }
             }
         }
 
-        private DataSocket ExtractProperty(PropertyInfo info)
+        private DataSocket ExtractField(FieldInfo info)
         {
-            return new DataSocket(_node, _socket, info.PropertyType);
+            return new DataSocket(_node, _type, info.FieldType, _socket)
+            {
+                Name = info.Name
+            };
         }
     }
 
-    internal class PropertyExtractor
+    internal class FieldExtractor
     {
         private readonly Type _type;
         private readonly BindingFlags _flags = BindingFlags.Public | BindingFlags.Instance;
 
-        public PropertyExtractor(Type type)
+        public FieldExtractor(Type type)
         {
             _type = type;
         }
 
-        public IEnumerable<PropertyInfo> Properties => _type.GetProperties(_flags).Where(p => p.CanWrite);
+        public IEnumerable<FieldInfo> Fields => _type.GetFields(_flags);
     }
 }

@@ -1,4 +1,5 @@
-﻿using VEdit.Plugins;
+﻿using System.Collections.Generic;
+using VEdit.Plugins;
 
 namespace VEdit.StandardLibrary
 {
