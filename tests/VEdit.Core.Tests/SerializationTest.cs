@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -8,7 +7,7 @@ namespace VEdit.Core.Tests
     [TestFixture]
     public class SerializationTest
     {
-        struct Test
+        private struct Test
         {
             public string Text;
             public int Value;

@@ -20,7 +20,7 @@ namespace VEdit.Core
 
         public Socket(Node node, SocketType type)
         {
-            Node = node;
+            Node = node ?? throw new ArgumentNullException(nameof(node));
             Type = type;
         }
     }
