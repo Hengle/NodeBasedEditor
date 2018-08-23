@@ -3,11 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using VEdit.Common;
 using VEdit.Editor;
-using VEdit.Execution;
 
 namespace VEdit.UI
 {
-    public class TextFileEditor : ExecutableFileEditor
+    public class TextFileEditor : FileEditor
     {
         private string _content;
         public string Content
@@ -56,25 +55,6 @@ namespace VEdit.UI
         {
             var io = ServiceProvider.Get<IFileIO>();
             io.Write(Path, Content ?? string.Empty);
-        }
-
-        public override bool CanExecuteNode(GraphNodeEntry data)
-        {
-            var inputData = data.Input.Where(i => i.Type == PinType.Data).ToList();
-            var outputData = data.Output.Where(i => i.Type == PinType.Data).ToList();
-
-            return inputData.Count == 1 && inputData[0].DataType == typeof(string) &&
-                outputData.Count == 1 && outputData[0].DataType == typeof(string);
-        }
-
-        public override void OnAfterExecute(IExecutionBlock block)
-        {
-            Content = block.Out[0].Value as string;
-        }
-
-        public override void OnBeforeExecute(IExecutionBlock block)
-        {
-            block.In[0].Value = Content;
         }
     }
 }

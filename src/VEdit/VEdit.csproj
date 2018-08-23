@@ -82,6 +82,7 @@
     <Compile Include="Behaviours\LinkBehaviour.cs" />
     <Compile Include="Behaviours\NumericTextboxBehaviour.cs" />
     <Compile Include="Behaviours\PinShapeBehaviour.cs" />
+    <Compile Include="Behaviours\FocusOnClickBehaviour.cs" />
     <Compile Include="Behaviours\ResizeGripBehaviour.cs" />
     <Compile Include="Behaviours\States\Blackboard\DefaultState.cs" />
     <Compile Include="Behaviours\States\Blackboard\DrawTempLinkState.cs" />

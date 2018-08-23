@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using VEdit.Execution;
 using System.Linq;
 
 namespace VEdit.Editor
@@ -13,11 +12,6 @@ namespace VEdit.Editor
         {
             IsCompact = isCompact;
             Method = method;
-        }
-
-        public override IExecutionBlock Compile(IExecutionContext context)
-        {
-            return new MethodBlock(context, Method, Output.Count(o => !o.IsExec));
         }
     }
 }

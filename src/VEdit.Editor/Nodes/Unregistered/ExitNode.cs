@@ -1,5 +1,4 @@
 ﻿using System;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {
@@ -21,11 +20,6 @@ namespace VEdit.Editor
         public override Pin AddExecPin(string name = null)
         {
             return AddExecPin(Direction.Input, name, IsEditable, IsEditable);
-        }
-
-        public override IExecutionBlock Compile(IExecutionContext context)
-        {
-            return new PassThroughBlock(context);
         }
     }
 }

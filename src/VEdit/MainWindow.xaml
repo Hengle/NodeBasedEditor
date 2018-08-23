@@ -28,6 +28,16 @@
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="boolToVis" />
         </Grid.Resources>
+
+        <Grid>
+            
+        </Grid>
+        
+        <!-- TODO: This space is reserved for an overlay -->
+        <Grid>
+            
+        </Grid>
+        
         <Grid Style="{StaticResource BottomBarStyle}">
             <mahApps:MetroTabControl  TabStripPlacement="Bottom">
                 <mahApps:MetroTabItem Header="Output">

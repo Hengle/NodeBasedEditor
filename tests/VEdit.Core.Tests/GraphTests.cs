@@ -13,7 +13,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddNode_ValidNode_DoesNotThrow()
         {
-            Assert.DoesNotThrow(() => _graph.AddNode(new TestNode()));
+            Assert.DoesNotThrow(() => _graph.AddNode(new BranchNode()));
         }
 
         [Test]
@@ -25,7 +25,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddNode_DuplicateNode_ThrowsArgumentException()
         {
-            Node testNode = new TestNode();
+            Node testNode = new BranchNode();
             _graph.AddNode(testNode);
 
             Assert.Throws<ArgumentException>(() => _graph.AddNode(testNode));
@@ -34,7 +34,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void TryAddNode_ValidNode_ReturnsTrue()
         {
-            Assert.IsTrue(_graph.TryAddNode(new TestNode()));
+            Assert.IsTrue(_graph.TryAddNode(new BranchNode()));
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void TryAddNode_DuplicateNode_ReturnsFalse()
         {
-            Node testNode = new TestNode();
+            Node testNode = new BranchNode();
 
             _graph.AddNode(testNode);
 

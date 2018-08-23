@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using VEdit.Common;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {
@@ -42,13 +41,6 @@ namespace VEdit.Editor
             {
                 _provider.OpenInEditor(LinkedGraphId);
             }
-        }
-
-        public override IExecutionBlock Compile(IExecutionContext context)
-        {
-            var newContext = new ExecutionContext(context);
-            var result = LinkedGraph.Compile(newContext);
-            return new EntryExitBlock(result[0], result[1], newContext);
         }
     }
 }

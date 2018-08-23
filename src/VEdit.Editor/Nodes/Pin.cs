@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using VEdit.Common;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {

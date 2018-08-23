@@ -65,48 +65,6 @@ namespace VEdit.Editor
                 DisplayName = "New string",
                 Keywords = "variable string"
             });
-
-            Register(new NodeEntry(typeof(BranchNode), BranchNode.Template)
-            {
-                DisplayName = "Branch",
-                Category = "Flow",
-                Keywords = "branch if bool flow"
-            });
-
-            Register(new NodeEntry(typeof(SequenceNode), SequenceNode.Template)
-            {
-                DisplayName = "Sequence",
-                Category = "Flow",
-                Keywords = "sequence execute flow"
-            });
-
-            Register(new NodeEntry(typeof(WhileNode), WhileNode.Template)
-            {
-                DisplayName = "While",
-                Category = "Flow",
-                Keywords = "while loop flow"
-            });
-
-            Register(new NodeEntry(typeof(ForLoopNode), ForLoopNode.Template)
-            {
-                DisplayName = "For",
-                Category = "Flow",
-                Keywords = "for loop flow"
-            });
-
-            Register(new NodeEntry(typeof(PrintNode), PrintNode.Template)
-            {
-                DisplayName = "Print",
-                Category = "Utils",
-                Keywords = "print string"
-            });
-
-            Register(new NodeEntry(typeof(ToStringNode), ToStringNode.Template)
-            {
-                DisplayName = "To String",
-                Category = "Utils",
-                Keywords = "to string"
-            });
         }
 
         public NodeEntry Get(Guid templateId)

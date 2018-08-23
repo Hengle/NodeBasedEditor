@@ -40,14 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\NodeExtensions.cs" />
     <Compile Include="Extensions\SocketExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="GenericNode.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="MainGraph.cs" />
     <Compile Include="MethodGraph.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeBuilder.cs" />
-    <Compile Include="Nodes\TestNode.cs" />
+    <Compile Include="Nodes\BranchNode.cs" />
+    <Compile Include="Nodes\ForEachNode.cs" />
+    <Compile Include="Nodes\MethodNode.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Socket.cs" />
     <Compile Include="SocketExtractor.cs" />

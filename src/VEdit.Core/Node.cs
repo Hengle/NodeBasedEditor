@@ -1,81 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VEdit.Core
 {
     [Serializable]
     public abstract class Node
     {
-        // Represents the instance id
-        public Guid Id { get; }
+        public Graph Graph { get; set; }
 
-        private readonly List<DataSocket> _inputData = new List<DataSocket>();
-        public IReadOnlyList<DataSocket> InputData => _inputData;
+        private readonly HashSet<Parameter> _parameters = new HashSet<Parameter>();
+        public IReadOnlyList<Parameter> Parameters => _parameters.ToList();
 
-        private readonly List<DataSocket> _outputData = new List<DataSocket>();
-        public IReadOnlyList<DataSocket> OutputData => _outputData;
+        private readonly List<Socket> _input = new List<Socket>();
+        public IReadOnlyList<Socket> Input => _input;
 
-        private readonly List<ExecSocket> _inputExec = new List<ExecSocket>();
-        public IReadOnlyList<ExecSocket> InputExec => _inputExec;
+        private readonly List<Socket> _output = new List<Socket>();
+        public IReadOnlyList<Socket> Output => _output;
 
-        private readonly List<ExecSocket> _outputExec = new List<ExecSocket>();
-        public IReadOnlyList<ExecSocket> OutputExec => _outputExec;
-
-        public Node()
+        public virtual void AddInput(Socket socket)
         {
-            Id = Guid.NewGuid();
+            if (socket is null)
+                throw new ArgumentNullException(nameof(socket));
+
+            _input.Add(socket);
         }
 
-        public virtual bool AddSocket(Socket socket)
+        public virtual void AddOutput(Socket socket)
         {
-            if (socket is DataSocket ds)
-            {
-                UseDataSocket(socket.Type, container => container.Add(ds));
-            }
-            else if (socket is ExecSocket es)
-            {
-                UseExecSocket(socket.Type, container => container.Add(es));
-            }
-            return true;
+            if (socket is null)
+                throw new ArgumentNullException(nameof(socket));
+
+            _output.Add(socket);
         }
 
-        public virtual bool RemoveSocket(Socket socket)
+        public virtual void RemoveInput(Socket socket)
         {
-            if (socket is DataSocket ds)
-            {
-                UseDataSocket(socket.Type, container => container.Remove(ds));
-            }
-            else if (socket is ExecSocket es)
-            {
-                UseExecSocket(socket.Type, container => container.Remove(es));
-            }
-            return true;
+            if (socket is null)
+                throw new ArgumentNullException(nameof(socket));
+
+            _input.Remove(socket);
         }
 
-        public override int GetHashCode() => Id.GetHashCode();
-
-        private void UseDataSocket(SocketType type, Action<List<DataSocket>> operation)
+        public virtual void RemoveOutput(Socket socket)
         {
-            if (type == SocketType.Input)
-            {
-                operation(_inputData);
-            }
-            else
-            {
-                operation(_outputData);
-            }
+            if (socket is null)
+                throw new ArgumentNullException(nameof(socket));
+
+            _output.Remove(socket);
         }
 
-        private void UseExecSocket(SocketType type, Action<List<ExecSocket>> operation)
+        internal void AddParameter(Parameter parameter)
         {
-            if (type == SocketType.Input)
-            {
-                operation(_inputExec);
-            }
-            else
-            {
-                operation(_outputExec);
-            }
+            _parameters.Add(parameter);
         }
     }
 }

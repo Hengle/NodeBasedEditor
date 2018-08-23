@@ -48,14 +48,8 @@
     <Compile Include="Graph\Comment.cs" />
     <Compile Include="Breakpoint.cs" />
     <Compile Include="IImage.cs" />
-    <Compile Include="Nodes\Core\BranchNode.cs" />
-    <Compile Include="Nodes\Core\ForLoopNode.cs" />
-    <Compile Include="Nodes\Core\PrintNode.cs" />
-    <Compile Include="Nodes\Core\SequenceNode.cs" />
     <Compile Include="Graph\GraphHelpers.cs" />
     <Compile Include="Graph\TempLink.cs" />
-    <Compile Include="Nodes\Core\ToStringNode.cs" />
-    <Compile Include="Nodes\Core\WhileNode.cs" />
     <Compile Include="Nodes\Unregistered\GetNode.cs" />
     <Compile Include="Nodes\NodeHelpers.cs" />
     <Compile Include="Nodes\EditableNode.cs" />
@@ -102,10 +96,6 @@
     <ProjectReference Include="..\VEdit.Common\VEdit.Common.csproj">
       <Project>{22A8C4CF-4654-480D-B34C-3CCE7DD76963}</Project>
       <Name>VEdit.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VEdit.Execution\VEdit.Execution.csproj">
-      <Project>{65456007-0BA8-4B38-A226-21AAF96EC665}</Project>
-      <Name>VEdit.Execution</Name>
     </ProjectReference>
     <ProjectReference Include="..\VEdit.Plugins\VEdit.Plugins.csproj">
       <Project>{cf645bee-e684-4ed8-ae37-54faec2ea79f}</Project>

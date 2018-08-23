@@ -21,15 +21,7 @@ namespace VEdit.Editor
             Register<ExitNode>((root, templateID) => new ExitNode(root));
             Register<GraphNode>((root, templateID) => new GraphNode(root, templateID));
             Register<SplitNode>((root, templateID) => new SplitNode(root));
-            Register<PrintNode>((root, templateID) => new PrintNode(root));
-            Register<ToStringNode>((root, templateID) => new ToStringNode(root));
-
-            // Flow
-            Register<SequenceNode>((root, templateID) => new SequenceNode(root));
-            Register<ForLoopNode>((root, templateID) => new ForLoopNode(root));
-            Register<BranchNode>((root, templateID) => new BranchNode(root));
-            Register<WhileNode>((root, templateID) => new WhileNode(root));
-
+           
             // Variables
             Register<VariableNode<int>>((root, templateID) =>  new VariableNode<int>(root, templateID));
             Register<VariableNode<bool>>((root, templateID) =>  new VariableNode<bool>(root, templateID));

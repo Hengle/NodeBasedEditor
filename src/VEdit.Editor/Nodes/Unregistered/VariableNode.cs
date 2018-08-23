@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using VEdit.Common;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {
@@ -117,13 +116,6 @@ namespace VEdit.Editor
                 }
                 result.Load(arc);
             }
-        }
-
-        public override IExecutionBlock Compile(IExecutionContext context)
-        {
-            var variable = context.AddVariable(Id, Type);
-            variable.Value = DefaultValue;
-            return new GetVariableBlock(Id, context);
         }
     }
 

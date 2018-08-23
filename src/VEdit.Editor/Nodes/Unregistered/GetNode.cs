@@ -1,6 +1,5 @@
 ﻿using System;
 using VEdit.Common;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {
@@ -43,10 +42,5 @@ namespace VEdit.Editor
         }
 
         public Pin GetOutput() => Output[0];
-
-        public override IExecutionBlock Compile(IExecutionContext context)
-        {
-            return new GetVariableBlock(Variable.Id, context);
-        }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using VEdit.Common;
-using VEdit.Execution;
 
 namespace VEdit.Editor
 {
@@ -351,7 +350,5 @@ namespace VEdit.Editor
         }
 
         #endregion
-
-        public abstract IExecutionBlock Compile(IExecutionContext context);
     }
 }

@@ -1,27 +1,23 @@
 ﻿using NUnit.Framework;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
 {
     [TestFixture]
     public class SerializationTest
     {
-        private struct Test
-        {
-            public string Text;
-            public int Value;
-        }
-
         [Test]
         public void Serialize_GenericNode_DoesNotThrow()
         {
-            Test test;
-            test.Text = "asd";
+            StructWithTwoFields test;
+            test.SomeString = "asd";
+            test.SomeInt = 5;
 
-            NodeBuilder<GenericNode, GenericNodeBuilder> _builder = new GenericNodeBuilder();
-            var node = _builder
-                .AddInput<Test>("Parent")
+            var builder = new MethodNodeBuilder();
+            var node = builder
+                .AddInput<StructWithTwoFields>("Parent")
                 .AddInput<bool>()
                 .Build();
 
@@ -32,7 +28,7 @@ namespace VEdit.Core.Tests
 
                 stream.Seek(0, SeekOrigin.Begin);
 
-                Node result = (GenericNode)formatter.Deserialize(stream);
+                Node result = (MethodNode)formatter.Deserialize(stream);
             }
         }
     }

@@ -3,7 +3,7 @@
 namespace VEdit.Core.Nodes
 {
     [Serializable]
-    public class TestNode : Node
+    public class MethodNode : Node
     {
     }
 }

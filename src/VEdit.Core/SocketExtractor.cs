@@ -10,7 +10,6 @@ namespace VEdit.Core
     {
         private readonly FieldExtractor _propertyExtractor;
         private readonly Node _node;
-        private readonly SocketType _type;
         private readonly DataSocket _socket;
 
         public SocketExtractor(DataSocket socket)
@@ -21,7 +20,6 @@ namespace VEdit.Core
 
             _propertyExtractor = new FieldExtractor(dataType);
             _node = socket.Node;
-            _type = socket.Type;
         }
 
         public IEnumerable<DataSocket> Sockets
@@ -37,7 +35,7 @@ namespace VEdit.Core
 
         private DataSocket ExtractField(FieldInfo info)
         {
-            return new DataSocket(_node, _type, info.FieldType, _socket)
+            return new DataSocket(_node, info.FieldType, _socket)
             {
                 Name = info.Name
             };

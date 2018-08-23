@@ -1,20 +1,14 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace VEdit.Core.Tests
 {
     [TestFixture]
     public class NodeBuilderTests
     {
-        private struct SomeStruct
-        {
-            public string SomeString;
-        }
-
         [Test]
         public void Build_ReturnsNode()
         {
-            var builder = new GenericNodeBuilder();
+            var builder = new MethodNodeBuilder();
             var result = builder.Build();
 
             Assert.IsInstanceOf<Node>(result);
@@ -23,20 +17,20 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddInput_ChainTwoTimes_CreatesTwoSockets()
         {
-            var builder = new GenericNodeBuilder();
+            var builder = new MethodNodeBuilder();
 
             var result = builder
                 .AddInput<int>()
                 .AddInput<bool>()
                 .Build();
 
-            Assert.AreEqual(2, result.InputData.Count);
+            Assert.AreEqual(2, result.Input.Count);
         }
 
         [Test]
         public void Build_Reuse_ReturnsNull()
         {
-            var builder = new GenericNodeBuilder();
+            var builder = new MethodNodeBuilder();
 
             var result = builder
                 .AddInput<int>()
@@ -50,13 +44,13 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddInput_StructType_CreatesSplittableSocket()
         {
-            var builder = new GenericNodeBuilder();
+            var builder = new MethodNodeBuilder();
 
             var result = builder
-                .AddInput<SomeStruct>()
+                .AddInput<StructWithTwoFields>()
                 .Build();
 
-            Assert.IsInstanceOf(typeof(SplittableSocket), result.InputData[0]);
+            Assert.IsInstanceOf(typeof(SplitSocket), result.Input[0]);
         }
     }
 }
