@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
 using System;
-using VEdit.Core.Extensions;
-using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
 {
@@ -9,33 +7,10 @@ namespace VEdit.Core.Tests
     public class NodeTests
     {
         [Test]
-        public void AddDuplicateParameter_ResultsInUniqueParameter()
-        {
-            Parameter param = new GenericArgument(TypeConstraints.None);
-
-            Node node = new MethodNode();
-            node.AddParameter(param);
-            node.AddParameter(param);
-
-            Assert.AreEqual(1, node.Parameters.Count);
-        }
-
-        [Test]
-        public void AddArgument_IsGenericExtension_ReturnsTrue()
-        {
-            Parameter param = new GenericArgument(TypeConstraints.None);
-
-            Node node = new MethodNode();
-            node.AddParameter(param);
-
-            Assert.IsTrue(node.IsGeneric());
-        }
-
-        [Test]
         public void RemoveInputAndOutput_CountIsZero()
         {
-            Node node = new MethodNode();
-            DataSocket socket = new DataSocket<int>(node);
+            Node node = new TestNode();
+            DataSocket socket = new DataSocket<int>();
 
             node.AddInput(socket);
             Assert.AreEqual(1, node.Input.Count);
@@ -53,7 +28,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void RemoveInputAndOutput_NullSocket_ThrowArgumentNullException()
         {
-            Node node = new MethodNode();
+            Node node = new TestNode();
 
             Assert.Throws<ArgumentNullException>(() => node.RemoveInput(null));
             Assert.Throws<ArgumentNullException>(() => node.RemoveOutput(null));
@@ -62,8 +37,8 @@ namespace VEdit.Core.Tests
         [Test]
         public void RemoveInputAndOutput_NonExistingSocket_ReturnsFalse()
         {
-            Node node = new MethodNode();
-            DataSocket socket = new DataSocket<int>(node);
+            Node node = new TestNode();
+            DataSocket socket = new DataSocket<int>();
 
             var result1 = node.RemoveInput(socket);
             Assert.IsFalse(result1);
@@ -75,7 +50,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddInputAndOutput_NullSocket_ThrowsArgumentNullException()
         {
-            Node node = new MethodNode();
+            Node node = new TestNode();
 
             Assert.Throws<ArgumentNullException>(() => node.AddInput(null));
             Assert.Throws<ArgumentNullException>(() => node.AddOutput(null));

@@ -7,22 +7,14 @@ namespace VEdit.Core
     [Serializable]
     public abstract class Socket
     {
-        public Node Node { get; }
-
+        public virtual Node Node { get; internal set; }
         public virtual string Name { get; set; }
-
-        public Socket(Node node)
-        {
-            Node = node ?? throw new ArgumentNullException(nameof(node));
-        }
     }
 
     [Serializable]
     public class ExecSocket : Socket
     {
-        public ExecSocket(Node node) : base(node)
-        {
-        }
+
     }
 
     [Serializable]
@@ -31,7 +23,7 @@ namespace VEdit.Core
         public DataSocket Parent { get; }
         public virtual Type DataType { get; }
 
-        public DataSocket(Node node, Type dataType, DataSocket parent = null) : base(node)
+        public DataSocket(Type dataType, DataSocket parent = null)
         {
             DataType = dataType ?? throw new ArgumentNullException(nameof(dataType));
             Parent = parent;
@@ -41,7 +33,7 @@ namespace VEdit.Core
     [Serializable]
     public class DataSocket<T> : DataSocket
     {
-        public DataSocket(Node node) : base(node, typeof(T))
+        public DataSocket() : base(typeof(T))
         {
         }
     }
@@ -52,7 +44,7 @@ namespace VEdit.Core
     {
         private DataSocket _socket;
 
-        public SplitSocket(DataSocket socket) : base(socket.Node, socket.DataType, socket.Parent)
+        public SplitSocket(DataSocket socket) : base(socket.DataType, socket.Parent)
         {
             _socket = socket;
         }
@@ -61,6 +53,12 @@ namespace VEdit.Core
         {
             get => _socket.Name;
             set => _socket.Name = value;
+        }
+
+        public override Node Node
+        {
+            get => _socket.Node;
+            internal set => _socket.Node = value;
         }
 
         private List<DataSocket> _children;
@@ -84,16 +82,15 @@ namespace VEdit.Core
         public Parameter Parameter { get; }
         private Type _dataType;
 
-        public GenericSocket(Node node, Parameter parameter) : base(node, typeof(void), null)
+        public GenericSocket(Parameter parameter) : base(typeof(void), null)
         {
             Parameter = parameter;
-            parameter.Observers.Add(this);
-            node.AddParameter(parameter);
+            parameter.AddObserver(this);
         }
 
         public bool TrySetDataType(Type dataType)
         {
-            return Parameter is GenericArgument arg && arg.TryChangeType(dataType);
+            return Parameter.TryChangeType(dataType);
         }
 
         public void Update(Parameter param)

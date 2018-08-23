@@ -24,6 +24,11 @@ namespace VEdit.Core
             if (socket is null)
                 throw new ArgumentNullException(nameof(socket));
 
+            if (socket is GenericSocket gs)
+                AddParameter(gs.Parameter);
+
+            socket.Node = this;
+
             return _input.Add(socket);
         }
 
@@ -31,6 +36,11 @@ namespace VEdit.Core
         {
             if (socket is null)
                 throw new ArgumentNullException(nameof(socket));
+
+            if (socket is GenericSocket gs)
+                AddParameter(gs.Parameter);
+
+            socket.Node = this;
 
             return _output.Add(socket);
         }
@@ -40,6 +50,11 @@ namespace VEdit.Core
             if (socket is null)
                 throw new ArgumentNullException(nameof(socket));
 
+            if (socket is GenericSocket gs)
+                RemoveParameter(gs.Parameter);
+
+            socket.Node = null;
+
             return _input.Remove(socket);
         }
 
@@ -48,12 +63,22 @@ namespace VEdit.Core
             if (socket is null)
                 throw new ArgumentNullException(nameof(socket));
 
+            if (socket is GenericSocket gs)
+                RemoveParameter(gs.Parameter);
+
+            socket.Node = null;
+
             return _output.Remove(socket);
         }
 
-        internal void AddParameter(Parameter parameter)
+        protected virtual void AddParameter(Parameter parameter)
         {
             _parameters.Add(parameter);
+        }
+
+        protected virtual bool RemoveParameter(Parameter parameter)
+        {
+            return _parameters.Remove(parameter);
         }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using VEdit.Core;
 
-namespace VEdit.Core.Nodes
+namespace VEdit.CSharp.Nodes
 {
     [Serializable]
-    public sealed class ForEachNode : Node
+    public sealed class ForEachNode : CSharpNode
     {
         public ExecSocket In { get; }
         public ExecSocket LoopBody { get; }
@@ -18,20 +19,20 @@ namespace VEdit.Core.Nodes
             GenericArgument argument = new GenericArgument(TypeConstraints.None);
             GenericParameter enumerable = new GenericParameter(typeof(IEnumerable<>), argument);
 
-            Collection = new GenericSocket(this, enumerable);
-            Item = new GenericSocket(this, argument);
+            Collection = new GenericSocket(enumerable);
+            Item = new GenericSocket(argument);
 
-            LoopBody = new ExecSocket(this)
+            LoopBody = new ExecSocket()
             {
                 Name = "Loop"
             };
 
-            Completed = new ExecSocket(this)
+            Completed = new ExecSocket()
             {
                 Name = "Completed"
             };
 
-            In = new ExecSocket(this);
+            In = new ExecSocket();
 
             AddInput(In);
             AddInput(Collection);

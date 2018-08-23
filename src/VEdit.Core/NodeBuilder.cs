@@ -1,5 +1,4 @@
 ﻿using VEdit.Core.Extensions;
-using VEdit.Core.Nodes;
 
 namespace VEdit.Core
 {
@@ -30,7 +29,7 @@ namespace VEdit.Core
     {
         public TBuilder AddInput<T>(string name = null)
         {
-            var socket = new DataSocket<T>(Object)
+            var socket = new DataSocket<T>()
             {
                 Name = name
             };
@@ -49,7 +48,7 @@ namespace VEdit.Core
 
         public TBuilder AddOutput<T>(string name = null)
         {
-            var socket = new DataSocket<T>(Object)
+            var socket = new DataSocket<T>()
             {
                 Name = name
             };
@@ -65,10 +64,5 @@ namespace VEdit.Core
 
             return _this;
         }
-    }
-
-    public class MethodNodeBuilder : NodeBuilder<MethodNode, MethodNodeBuilder>
-    {
-
     }
 }

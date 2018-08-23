@@ -1,4 +1,6 @@
-﻿namespace VEdit.Core
+﻿using VEdit.Core;
+
+namespace VEdit.CSharp
 {
     public class MethodGraph : Graph
     {

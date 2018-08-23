@@ -9,7 +9,6 @@ namespace VEdit.Core
     internal class SocketExtractor
     {
         private readonly FieldExtractor _propertyExtractor;
-        private readonly Node _node;
         private readonly DataSocket _socket;
 
         public SocketExtractor(DataSocket socket)
@@ -19,7 +18,6 @@ namespace VEdit.Core
             Type dataType = socket.DataType.IsStruct() ? socket.DataType : throw new ArgumentException("type is not a struct");
 
             _propertyExtractor = new FieldExtractor(dataType);
-            _node = socket.Node;
         }
 
         public IEnumerable<DataSocket> Sockets
@@ -35,7 +33,7 @@ namespace VEdit.Core
 
         private DataSocket ExtractField(FieldInfo info)
         {
-            return new DataSocket(_node, info.FieldType, _socket)
+            return new DataSocket(info.FieldType, _socket)
             {
                 Name = info.Name
             };

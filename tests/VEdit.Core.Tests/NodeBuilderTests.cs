@@ -8,7 +8,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void Build_ReturnsNode()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
             var result = builder.Build();
 
             Assert.IsInstanceOf<Node>(result);
@@ -17,7 +17,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void Build_Reuse_ReturnsNull()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
 
             var result = builder
                 .AddInput<int>()
@@ -31,7 +31,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddInput_ChainTwoTimes_CreatesTwoSockets()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
 
             var result = builder
                 .AddInput<int>()
@@ -44,7 +44,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddOutput_ChainTwoTimes_CreatesTwoSockets()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
 
             var result = builder
                 .AddOutput<int>()
@@ -57,7 +57,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddInput_StructType_CreatesSplittableSocket()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
 
             var result = builder
                 .AddInput<StructWithTwoFields>()
@@ -69,7 +69,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddOutput_StructType_CreatesSplittableSocket()
         {
-            var builder = new MethodNodeBuilder();
+            var builder = new TestNodeBuilder();
 
             var result = builder
                 .AddOutput<StructWithTwoFields>()

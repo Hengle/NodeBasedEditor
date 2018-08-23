@@ -2,8 +2,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using VEdit.Core;
 
-namespace VEdit.Core.Tests
+namespace VEdit.CSharp.Tests
 {
     [TestFixture]
     public class ParameterTests
@@ -57,15 +58,6 @@ namespace VEdit.Core.Tests
             arg.TryChangeType(typeof(int));
             Assert.AreEqual(typeof(List<int>), param1.Type);
             Assert.AreEqual(typeof(HashSet<int>), param2.Type);
-        }
-
-        [Test]
-        public void GenericParameter_SetType_ThrowsInvalidOperationException()
-        {
-            GenericArgument arg = new GenericArgument(TypeConstraints.None);
-            GenericParameter param = new GenericParameter(typeof(List<>), arg);
-
-            Assert.Throws<InvalidOperationException>(() => param.Type = typeof(int));
         }
 
         [Test]

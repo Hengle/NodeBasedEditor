@@ -1,9 +1,12 @@
 ﻿using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using VEdit.Core;
 
-namespace VEdit.Core.Nodes
+namespace VEdit.CSharp.Nodes
 {
     [Serializable]
-    public sealed class BranchNode : Node
+    public sealed class BranchNode : CSharpNode
     {
         public DataSocket<bool> Condition { get; }
         public ExecSocket True { get; }
@@ -12,22 +15,22 @@ namespace VEdit.Core.Nodes
 
         public BranchNode()
         {
-            Condition = new DataSocket<bool>(this)
+            Condition = new DataSocket<bool>()
             {
                 Name = "Condition"
             };
 
-            True = new ExecSocket(this)
+            True = new ExecSocket()
             {
                 Name = "True"
             };
 
-            False = new ExecSocket(this)
+            False = new ExecSocket()
             {
                 Name = "False"
             };
 
-            In = new ExecSocket(this);
+            In = new ExecSocket();
 
             AddInput(Condition);
             AddInput(In);

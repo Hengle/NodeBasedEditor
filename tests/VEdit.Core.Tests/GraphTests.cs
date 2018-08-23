@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using System;
-using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
 {
@@ -8,13 +7,13 @@ namespace VEdit.Core.Tests
     [TestOf(typeof(Graph))]
     public class GraphTests
     {
-        private readonly Graph _graph = new MethodGraph();
+        private readonly Graph _graph = new TestGraph();
 
         [Test]
         public void AddNode_ValidNode_NodesCountIsOne()
         {
-            var graph = new MethodGraph();
-            graph.AddNode(new BranchNode());
+            var graph = new TestGraph();
+            graph.AddNode(new TestNode());
             Assert.AreEqual(1, graph.Nodes.Count);
         }
 
@@ -27,7 +26,7 @@ namespace VEdit.Core.Tests
         [Test]
         public void AddNode_DuplicateNode_ThrowsArgumentException()
         {
-            Node testNode = new BranchNode();
+            Node testNode = new TestNode();
             _graph.AddNode(testNode);
 
             Assert.Throws<ArgumentException>(() => _graph.AddNode(testNode));

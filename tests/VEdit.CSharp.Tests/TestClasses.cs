@@ -1,8 +1,15 @@
 ﻿using System;
+using VEdit.Core;
 
-namespace VEdit.Core.Tests
+namespace VEdit.CSharp.Tests
 {
     // *** DO NOT MODIFY THESE CLASSES, CREATE OTHER CLASSES IF THESE DO NOT FIT YOUR NEEDS *** //
+
+    [Serializable]
+    public class TestNode : Node
+    {
+
+    }
 
     public struct StructWithTwoFields
     {
@@ -19,23 +26,6 @@ namespace VEdit.Core.Tests
     }
 
     public class ClassWithDefaultConstructor
-    {
-
-    }
-
-    [Serializable]
-    public class TestNode : Node
-    {
-
-    }
-
-    public class TestNodeBuilder : NodeBuilder<TestNode, TestNodeBuilder>
-    {
-
-    }
-
-    [Serializable]
-    public class TestGraph : Graph
     {
 
     }
