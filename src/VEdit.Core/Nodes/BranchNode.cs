@@ -3,7 +3,7 @@
 namespace VEdit.Core.Nodes
 {
     [Serializable]
-    public class BranchNode : Node
+    public sealed class BranchNode : Node
     {
         public DataSocket<bool> Condition { get; }
         public ExecSocket True { get; }

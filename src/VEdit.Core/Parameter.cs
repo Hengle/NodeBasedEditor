@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using VEdit.Core.Extensions;
 
 namespace VEdit.Core
 {
@@ -50,7 +51,10 @@ namespace VEdit.Core
 
         public void SetBaseClass(Type type)
         {
-            if (!IsValidClass(type))
+            if (type.IsGenericTypeDefinition)
+                throw new InvalidOperationException($"{nameof(type)} is not a constructed type.");
+
+            if (!type.CanBeDerived())
                 throw new InvalidOperationException($"{nameof(type)} is not a valid class.");
 
             BaseClass = type;
@@ -69,25 +73,19 @@ namespace VEdit.Core
             if (newType.IsGenericTypeDefinition)
                 return false;
 
-            if ((Constraints & TypeConstraints.Class) == TypeConstraints.Class)
-            {
-                if (!IsValidClass(newType))
-                    return false;
-            }
+            bool hasClassConstraint = (Constraints & TypeConstraints.Class) == TypeConstraints.Class;
+            if (hasClassConstraint && !newType.IsClass)
+                return false;
 
-            if ((Constraints & TypeConstraints.New) == TypeConstraints.New)
-            {
-                if (newType.IsClass && !(newType.GetConstructor(new Type[0]) != null))
-                    return false;
-            }
+            bool hasNewConstraint = (Constraints & TypeConstraints.New) == TypeConstraints.New;
+            if (hasNewConstraint && !newType.HasDefaultConstructor())
+                return false;
 
             Type = newType;
 
             NotifyObservers();
             return true;
         }
-
-        private bool IsValidClass(Type type) => type.IsClass && !type.IsSealed;
     }
 
     [Serializable]
@@ -95,6 +93,8 @@ namespace VEdit.Core
     {
         private readonly Type _genericTypeDefinition;
         private readonly Parameter[] _arguments;
+
+        public IReadOnlyList<Parameter> Arguments => _arguments;
 
         private Type _type;
         public override Type Type
@@ -111,13 +111,18 @@ namespace VEdit.Core
             if (arguments.Length == 0)
                 throw new ArgumentException($"{nameof(arguments)} count should be greater than 0.");
 
+            ObserveArguments(arguments);
+
+            _genericTypeDefinition = typeDefinition;
+            _arguments = arguments;
+        }
+
+        private void ObserveArguments(Parameter[] arguments)
+        {
             foreach (var param in arguments)
             {
                 param.Observers.Add(this);
             }
-
-            _genericTypeDefinition = typeDefinition;
-            _arguments = arguments;
         }
 
         public void Update(Parameter param)

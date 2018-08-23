@@ -11,9 +11,11 @@ namespace VEdit.Core.Tests
         private readonly Graph _graph = new MethodGraph();
 
         [Test]
-        public void AddNode_ValidNode_DoesNotThrow()
+        public void AddNode_ValidNode_NodesCountIsOne()
         {
-            Assert.DoesNotThrow(() => _graph.AddNode(new BranchNode()));
+            var graph = new MethodGraph();
+            graph.AddNode(new BranchNode());
+            Assert.AreEqual(1, graph.Nodes.Count);
         }
 
         [Test]
@@ -29,28 +31,6 @@ namespace VEdit.Core.Tests
             _graph.AddNode(testNode);
 
             Assert.Throws<ArgumentException>(() => _graph.AddNode(testNode));
-        }
-
-        [Test]
-        public void TryAddNode_ValidNode_ReturnsTrue()
-        {
-            Assert.IsTrue(_graph.TryAddNode(new BranchNode()));
-        }
-
-        [Test]
-        public void TryAddNode_ParameterIsNull_ReturnsFalse()
-        {
-            Assert.IsFalse(_graph.TryAddNode(null));
-        }
-
-        [Test]
-        public void TryAddNode_DuplicateNode_ReturnsFalse()
-        {
-            Node testNode = new BranchNode();
-
-            _graph.AddNode(testNode);
-
-            Assert.IsFalse(_graph.TryAddNode(testNode));
         }
     }
 }

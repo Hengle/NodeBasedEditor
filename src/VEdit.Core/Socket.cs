@@ -93,15 +93,7 @@ namespace VEdit.Core
 
         public bool TrySetDataType(Type dataType)
         {
-            if (Parameter is GenericArgument arg)
-            {
-                if (arg.TryChangeType(dataType))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return Parameter is GenericArgument arg && arg.TryChangeType(dataType);
         }
 
         public void Update(Parameter param)

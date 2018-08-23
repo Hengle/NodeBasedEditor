@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace VEdit.Core.Nodes
 {
     [Serializable]
-    public class ForEachNode : Node
+    public sealed class ForEachNode : Node
     {
         public ExecSocket In { get; }
         public ExecSocket LoopBody { get; }

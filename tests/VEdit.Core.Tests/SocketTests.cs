@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using VEdit.Core.Extensions;
 using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
@@ -17,7 +18,10 @@ namespace VEdit.Core.Tests
             Assert.AreEqual(socket.DataType, split.DataType);
             Assert.AreEqual(socket.Name, split.Name);
             Assert.AreEqual(2, split.Children.Count);
-            Assert.IsNull(split.Parent);
+            Assert.IsFalse(split.HasParent());
+
+            split.Name = "Test";
+            Assert.AreEqual(socket.Name, split.Name);
         }
 
         [Test]

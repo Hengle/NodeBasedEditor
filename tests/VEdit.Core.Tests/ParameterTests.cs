@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using VEdit.Core.Nodes;
 
 namespace VEdit.Core.Tests
 {
@@ -16,6 +15,57 @@ namespace VEdit.Core.Tests
 
             Assert.Throws<ArgumentException>(() => new GenericParameter(typeof(int), arg));
             Assert.Throws<ArgumentException>(() => new GenericParameter(typeof(IEnumerable<int>), arg));
+        }
+
+        [Test]
+        public void GenericParameter_MissingGenericArgument_ThrowsArgumentException()
+        {
+            Assert.Throws<ArgumentException>(() => new GenericParameter(typeof(IEnumerable<>)));
+        }
+
+        [Test]
+        public void GenericParameter_UseTwoArguments()
+        {
+            GenericArgument arg1 = new GenericArgument(TypeConstraints.None);
+            GenericArgument arg2 = new GenericArgument(TypeConstraints.Class);
+
+            GenericParameter param = new GenericParameter(typeof(Dictionary<,>), arg1, arg2);
+
+            Assert.AreEqual(2, param.Arguments.Count);
+        }
+
+        [Test]
+        public void GenericParameter_ChangeArgumentType()
+        {
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+            GenericParameter param = new GenericParameter(typeof(List<>), arg);
+
+            arg.TryChangeType(typeof(int));
+            Assert.AreEqual(typeof(List<int>), param.Type);
+
+            arg.TryChangeType(typeof(bool));
+            Assert.AreEqual(typeof(List<bool>), param.Type);
+        }
+
+        [Test]
+        public void GenericParameter_MultipleGenericParametersUsingOneArgument_ChangeArgumentType()
+        {
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+            GenericParameter param1 = new GenericParameter(typeof(List<>), arg);
+            GenericParameter param2 = new GenericParameter(typeof(HashSet<>), arg);
+
+            arg.TryChangeType(typeof(int));
+            Assert.AreEqual(typeof(List<int>), param1.Type);
+            Assert.AreEqual(typeof(HashSet<int>), param2.Type);
+        }
+
+        [Test]
+        public void GenericParameter_SetType_ThrowsInvalidOperationException()
+        {
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+            GenericParameter param = new GenericParameter(typeof(List<>), arg);
+
+            Assert.Throws<InvalidOperationException>(() => param.Type = typeof(int));
         }
 
         [Test]
@@ -46,10 +96,21 @@ namespace VEdit.Core.Tests
             Assert.Throws<InvalidOperationException>(() => arg.SetBaseClass(typeof(int)));
             Assert.Throws<InvalidOperationException>(() => arg.SetBaseClass(typeof(StructWithTwoFields)));
         }
+
         [Test]
-        public void GenericParameter_NoGenericArgument_ThrowsArgumentException()
+        public void GenericArgument_SetBaseClass_GenericTypeDefinition()
         {
-            Assert.Throws<ArgumentException>(() => new GenericParameter(typeof(IEnumerable<>)));
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+
+            Assert.Throws<InvalidOperationException>(() => arg.SetBaseClass(typeof(List<>)));
+        }
+
+        [Test]
+        public void GenericArgument_ValidClass()
+        {
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+
+            arg.SetBaseClass(typeof(List<int>));
         }
 
         [Test]
@@ -82,5 +143,14 @@ namespace VEdit.Core.Tests
             Assert.IsTrue(result);
         }
 
+        [Test]
+        public void GenericArgument_TryChangeType_TypeIsGenericTypeDefinition_ReturnsFalse()
+        {
+            GenericArgument arg = new GenericArgument(TypeConstraints.None);
+
+            bool result = arg.TryChangeType(typeof(List<>));
+
+            Assert.IsFalse(result);
+        }
     }
 }
