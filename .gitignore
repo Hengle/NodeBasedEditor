@@ -30,6 +30,9 @@ bld/
 # Axo Cover - Code Coverage
 **/.axoCover/**
 
+# Test graphs
+Playground/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

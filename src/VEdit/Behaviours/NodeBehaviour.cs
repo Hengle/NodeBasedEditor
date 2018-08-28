@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 using VEdit.Controls;
@@ -27,7 +28,7 @@ namespace VEdit
             var blackboardView = AssociatedObject.FindParentOfType<BlackboardView>();
 
             var behaviors = Interaction.GetBehaviors(blackboardView);
-            ParentBehaviour = behaviors[0] as BlackboardBehaviour;
+            ParentBehaviour = behaviors.First(b => b is BlackboardBehaviour) as BlackboardBehaviour;
 
             State = new DefaultState(this);
 
